@@ -29,8 +29,9 @@ class ShowList extends React.Component {
   render() {
     return (
       <div>
-        <h3> My Favorite Stores </h3>
-        <ul style={{ listStyleType: "none" }}>
+        <h4> My Favorite Stores <i class="fa fa-check"  ></i></h4>
+        
+        <div class="container">
           {this.props.namesa.map((friend, index) => {
             return <Place keyPlace={friend.name}
                           keyaddress={friend.address}
@@ -43,7 +44,7 @@ class ShowList extends React.Component {
                           handleIsVisible={friend.isVisible.state}
                           >{friend.name}</Place>
           })}
-        </ul>
+        </div>
       </div>
     )
   }
@@ -242,47 +243,56 @@ class YourComponent extends Component {
   render() {
 
     return (
-      <div style={divStyle}>
+      <div style={divStyle} >
+        <div class="container">
+          <h3>Generation code solution</h3>
+          <p >Here is all the stores around you, please select the store that you want to add into the "My Favorite Stores" list </p>
+          <div class="row">
+          <div  class="col-xs-12 col-sm-6">
+            <ShowList namesa={this.state.markedStoresList}
+                      deleteList={this.deleteList}
+                      handleMouseHover={this.handleMouseHover}
+                      handleMouseLeave={this.handleMouseLeave}
+                      handlechangeMark={this.handlechangeMark} />
+          </div>
 
-        <div style={divListContainer}>
-          <ShowList namesa={this.state.markedStoresList}
-                    deleteList={this.deleteList}
-                    handleMouseHover={this.handleMouseHover}
-                    handleMouseLeave={this.handleMouseLeave}
-                    handlechangeMark={this.handlechangeMark} />
+          <div class="col-xs-12 col-sm-6">
+           <div class="container">
+            <div class="row">
+              
+            </div>
+            <div class="row">
+            <Map google={this.props.google} 
+                 style={mapStyle}
+                 zoom={this.state.center.zoom}
+                 keyRe={this.keyprop}
+                 initialCenter={this.state.center.point}
+                onReady={this.initMap}>
+     
+            {data.map((item,index) => (
+
+
+              
+                item.isVisible &&
+                <Marker 
+                  onClick={this.mapClicked}
+                  key={index}
+                  keyData={index}
+                  title={item.Name}
+                  name={item.Name}
+                  address={item.Address}
+                  position={item.point}/>
+              
+
+            ))}
+
+            </Map>
+            </div>
+            </div>
+          </div>
+
+          </div>
         </div>
-
-        <div style={divMapContainer}>
-          <p>Here is all the stores around you, please select the store that you want to add into the "My Favorite Stores" list </p>
-          <Map google={this.props.google} 
-               style={mapStyle}
-               zoom={this.state.center.zoom}
-               keyRe={this.keyprop}
-               initialCenter={this.state.center.point}
-              onReady={this.initMap}>
-   
-          {data.map((item,index) => (
-
-
-            
-              item.isVisible &&
-              <Marker 
-                onClick={this.mapClicked}
-                key={index}
-                keyData={index}
-                title={item.Name}
-                name={item.Name}
-                address={item.Address}
-                position={item.point}/>
-            
-
-          ))}
-
-          </Map>
-        </div>
-
-        
-
       </div>
     );
   }
@@ -294,9 +304,8 @@ class YourComponent extends Component {
 var keyre= 4;
 
 var divStyle = {
-  border: 'red',
-  borderWidth: 2,
-  borderStyle: 'solid',
+
+  borderTop:'2px solid red',
   padding: "20px",
   height: "100%",
   position: "absolute",
@@ -321,7 +330,7 @@ var divListContainer = {
 
 var mapStyle = {
   position: 'relative',
-  height: "100%",
+  height: "300px",
   width: "100%"
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 const place = (props) =>{
 
-  return (<li>
+  return (<div class="row">
             <div style={props.handleIsVisible ? nameDivVisible : nameDivVisibleUnselect}>{props.keyPlace}</div>
             <div style={iconStyle}>
             	<i class="fa fa-trash" style={{ paddingRight: "5px"}} onClick={props.delEvent}></i>
@@ -11,24 +11,24 @@ const place = (props) =>{
                                         onClick={props.handlechangeMark} ></i>
               {
                 props.isHovering &&
-            	  <div style={divNewComments} >{props.keyaddress}</div>
+            	  <div style={divNewComments} ><div>{props.keyaddress}</div></div>
               }
             </div>
             
-          </li>)
+          </div>)
 
 }
 
 
 var nameDivVisible = {
-  height: "100%",
+  
   width: "80%",
   float:"left",
   borderBottom:"solid 1px #80808099"
 };
 
 var nameDivVisibleUnselect = {
-  height: "100%",
+  
   width: "80%",
   float:"left",
   borderBottom:"1px solid white",
@@ -46,13 +46,14 @@ var iconStyle = {
 };
 
 var divNewComments = {
-  position: "relative",
-  width: "200px",
+  position: "absolute",
+  width: "150px",
   zIndex: 90,
   backgroundColor: "white",
   border: "solid 1px #0000004d",
   fontSize: "9px",
-  padding: "4px"
+  padding: "4px",
+  marginLeft: "-60px"
 }
 
 export default place;
